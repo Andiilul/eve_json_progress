@@ -588,6 +588,7 @@ def run_phase9(
     }
 
     figures: dict[str, Any] = {}
+    skipped_figures: dict[str, Any] = {}
 
     figures["summary_overview"] = _summary_text_plot(
         app=app,
@@ -616,30 +617,58 @@ def run_phase9(
         title="Label Source Distribution from Phase 8",
     )
 
-    figures["event_type_initial"] = _horizontal_bar_plot(
-        event_type_counts,
-        paths["event_type_initial"],
-        title="Initial Event Type Distribution from Pre-pipeline Summary",
-    )
+    # The rebuilt compact split_summary intentionally omits verbose counters
+    # such as event_type_counts, app_proto_counts, and dest_port_summary. Do not
+    # force empty "No data available" charts into the report. Generate these
+    # optional figures only when the required counters are actually present.
+    if event_type_counts:
+        figures["event_type_initial"] = _horizontal_bar_plot(
+            event_type_counts,
+            paths["event_type_initial"],
+            title="Initial Event Type Distribution from Pre-pipeline Summary",
+        )
+    else:
+        skipped_figures["event_type_initial"] = {
+            "status": "skipped",
+            "reason": "event_type_counts is not available in compact split_summary",
+        }
 
-    figures["app_proto_initial"] = _horizontal_bar_plot(
-        app_proto_counts,
-        paths["app_proto_initial"],
-        title="Initial App Proto Distribution from Pre-pipeline Summary",
-    )
+    if app_proto_counts:
+        figures["app_proto_initial"] = _horizontal_bar_plot(
+            app_proto_counts,
+            paths["app_proto_initial"],
+            title="Initial App Proto Distribution from Pre-pipeline Summary",
+        )
+    else:
+        skipped_figures["app_proto_initial"] = {
+            "status": "skipped",
+            "reason": "app_proto_counts is not available in compact split_summary",
+        }
 
-    figures["dest_port_initial"] = _horizontal_bar_plot(
-        dest_port_counts,
-        paths["dest_port_initial"],
-        title="Initial Destination Port Distribution from Pre-pipeline Summary",
-    )
+    if dest_port_counts:
+        figures["dest_port_initial"] = _horizontal_bar_plot(
+            dest_port_counts,
+            paths["dest_port_initial"],
+            title="Initial Destination Port Distribution from Pre-pipeline Summary",
+        )
+    else:
+        skipped_figures["dest_port_initial"] = {
+            "status": "skipped",
+            "reason": "dest_port_summary is not available in compact split_summary",
+        }
 
-    figures["match_reason"] = _bar_plot(
-        match_reason_counts,
-        paths["match_reason"],
-        title="Pre-pipeline Match Reason Counts",
-        rotation=20,
-    )
+    if match_reason_counts:
+        figures["match_reason"] = _bar_plot(
+            match_reason_counts,
+            paths["match_reason"],
+            title="Pre-pipeline Match Reason Counts",
+            rotation=20,
+        )
+    else:
+        skipped_figures["match_reason"] = {
+            "status": "skipped",
+            "reason": "match_reason_counts is not available",
+        }
 
     figures["feature_group"] = _feature_group_plot(
         feature_group_summary_path,
@@ -708,6 +737,7 @@ def run_phase9(
         "label_distribution_rows": label_distribution_rows[:50],
 
         "figures": figures,
+        "skipped_figures": skipped_figures,
         "output": {
             "summary": str(summary_path),
             "summary_alias": str(summary_alias),
@@ -717,7 +747,7 @@ def run_phase9(
         "notes": [
             "Phase 9 does not read raw JSONL, train.csv, test.csv, or full dataset shards.",
             "If a desired chart needs exact full-data statistics not present here, add that aggregation to Phase 8 because Phase 8 already scans the full app JSONL.",
-            "split_eve_by_app summary is enough for initial app split counts and raw protocol/event/port context, but not enough for refined labels or feature-engineered summaries.",
+            "Compact split_summary may omit event_type/app_proto/port counters; Phase 9 skips charts that are not supported by available summary fields instead of generating empty figures.",
         ],
     }
 
