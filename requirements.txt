@@ -1,0 +1,27 @@
+# Core numerical / data stack
+numpy
+pandas
+scikit-learn
+matplotlib
+seaborn
+tqdm
+
+# PDF generation
+reportlab
+
+# Monitoring / performance helpers
+psutil
+threadpoolctl
+joblib
+orjson
+
+# Current additional model used in Phase 10/11
+xgboost
+
+# Parquet engines / IO
+pyarrow
+fastparquet
+
+# Optional future models (uncomment if you really use them in code)
+# lightgbm
+# catboost

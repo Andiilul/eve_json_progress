@@ -1,0 +1,42 @@
+# ==== Python ====
+__pycache__/
+*.py[cod]
+*$py.class
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.ipynb_checkpoints/
+
+# ==== Virtual env ====
+.venv/
+venv/
+ENV/
+env/
+
+# ==== OS / Editor ====
+.DS_Store
+Thumbs.db
+.vscode/          # (lihat opsi di bawah)
+.idea/
+
+# ==== Project artifacts ====
+/results/
+/data/
+/logs/
+/archives/
+*.log
+
+# model/artifact yang sering kebawa
+*.pkl
+*.joblib
+*.pdf
+*.png
+*.csv
+*.csv.gz
+*.zip
+*.rar
+
+# ==== Test / working folders ====
+/outputs_test/
+/work_test/
+/data/

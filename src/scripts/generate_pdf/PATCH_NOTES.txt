@@ -1,0 +1,28 @@
+Generate PDF redesigned report patch
+
+Scope:
+- Replace src/scripts/generate_pdf/ with this folder.
+- No CBR phase processing file is changed.
+
+Bug-tested fixes:
+- VSCode / Code Runner direct run works without CLI arguments from both project root and script folder.
+- Default artifacts path resolves to <project_root>/outputs_test, not the current script directory.
+- Supports central metrics stored either as wrapper JSON {"summary": {...}} or direct phase summary JSON.
+- Phase imports work in direct script mode by adding generate_pdf/ and generate_pdf/phases/ to sys.path.
+- Phase 1/2 are merged in genpdf_1; genpdf_2 intentionally returns empty.
+- Artifact/path listing sections are removed from phase renderers.
+- Phase 9 embeds PNG figures if the paths recorded in metrics exist.
+- Phase 10 shows ALL vs NO-LEAK correlations and full modeling feature lists when available.
+
+Run:
+    python src/scripts/generate_pdf/generate_pdf.py
+
+Default output:
+    outputs_test/reports/pipeline_report_single_click.pdf
+
+Optional CLI still supported:
+    --artifacts
+    --metrics-json
+    --output / --out
+    --run-id
+    --phases

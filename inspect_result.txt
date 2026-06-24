@@ -1,0 +1,132 @@
+✅ JSONL Feature Inspection
+Input file        : D:/eve.json
+Target field      : Target
+Flatten depth     : 1
+HEAD N            : 1,000,000
+RANDOM N          : 200,000
+
+=== File scan stats ===
+Total lines       : 800,507,375
+Empty lines       : 0
+Parse errors      : 2
+Valid records     : 800,507,373
+
+=== HEAD (first N records) ===
+Records analyzed  : 1,000,000
+Unique features   : 106
+Target unique     : 1
+Target distribution:
+  (missing): 1,000,000
+
+Top features by presence (HEAD):
+  timestamp: 1,000,000
+  event_type: 1,000,000
+  flow_id: 999,913
+  in_iface: 999,913
+  src_ip: 999,913
+  dest_ip: 999,913
+  proto: 999,913
+  community_id: 999,913
+  src_port: 997,024
+  dest_port: 997,024
+  flow.pkts_toserver: 925,072
+  flow.pkts_toclient: 925,072
+  flow.bytes_toserver: 925,072
+  flow.bytes_toclient: 925,072
+  flow.start: 925,072
+  flow.end: 913,450
+  flow.age: 913,450
+  flow.state: 913,450
+  flow.reason: 913,450
+  flow.alerted: 913,450
+  tcp.tcp_flags: 769,981
+  tcp.tcp_flags_ts: 769,981
+  tcp.tcp_flags_tc: 769,981
+  tcp.syn: 707,354
+  tcp.state: 707,354
+  tcp.ts_max_regions: 707,354
+  tcp.tc_max_regions: 707,354
+  app_proto: 141,429
+  pkt_src: 86,463
+  dns.type: 62,785
+  dns.id: 62,785
+  dns.rrname: 62,785
+  dns.rrtype: 62,785
+  dns.tx_id: 62,785
+  dns.opcode: 62,785
+  tcp.ack: 54,657
+  tcp.psh: 53,061
+  flow.bypassed: 35,971
+  flow.bypass: 35,971
+  flow.action: 35,971
+  tcp.fin: 34,504
+  alert.action: 11,622
+  alert.gid: 11,622
+  alert.signature_id: 11,622
+  alert.rev: 11,622
+  alert.signature: 11,622
+  alert.category: 11,622
+  alert.severity: 11,622
+  direction: 11,622
+  flow.src_ip: 11,622
+  ... and 56 more
+
+=== RANDOM (reservoir sample over whole file) ===
+Records sampled   : 200,000
+Unique features   : 115
+Target unique     : 1
+Target distribution:
+  (missing): 200,000
+
+Top features by presence (RANDOM):
+  timestamp: 200,000
+  event_type: 200,000
+  flow_id: 199,984
+  in_iface: 199,984
+  src_ip: 199,984
+  dest_ip: 199,984
+  proto: 199,984
+  community_id: 199,984
+  src_port: 199,251
+  dest_port: 199,251
+  flow.pkts_toserver: 166,561
+  flow.pkts_toclient: 166,561
+  flow.bytes_toserver: 166,561
+  flow.bytes_toclient: 166,561
+  flow.start: 166,561
+  flow.end: 158,387
+  flow.age: 158,387
+  flow.state: 158,387
+  flow.reason: 158,387
+  flow.alerted: 158,387
+  tcp.tcp_flags: 130,411
+  tcp.tcp_flags_ts: 130,411
+  tcp.tcp_flags_tc: 130,411
+  tcp.syn: 113,060
+  tcp.state: 113,060
+  tcp.ts_max_regions: 113,060
+  tcp.tc_max_regions: 113,060
+  pkt_src: 41,597
+  app_proto: 28,560
+  tcp.ack: 24,975
+  tcp.psh: 24,342
+  quic.version: 16,192
+  tcp.fin: 15,637
+  dns.type: 14,833
+  dns.id: 14,833
+  dns.rrname: 14,833
+  dns.rrtype: 14,833
+  dns.opcode: 14,833
+  dns.tx_id: 13,047
+  flow.bypassed: 12,228
+  flow.bypass: 12,228
+  flow.action: 12,228
+  alert.action: 8,174
+  alert.gid: 8,174
+  alert.signature_id: 8,174
+  alert.rev: 8,174
+  alert.signature: 8,174
+  alert.category: 8,174
+  alert.severity: 8,174
+  direction: 8,174
+  ... and 65 more
